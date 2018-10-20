@@ -20,6 +20,7 @@ bot.
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
 import os
+import re
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -42,7 +43,12 @@ def help(bot, update):
 
 def echo(bot, update):
     """Echo the user message."""
-    update.message.reply_text(update.message.text)
+    text = update.message.text
+    if re.match("[аеиоyыэюя]", text):
+        res = "Все говорят " + text + ", a ты купи слона"
+    else:
+        res = text + "? who cares?! Give me your soul!:)"
+    update.message.reply_text(res)
 
 
 def error(bot, update, error):
