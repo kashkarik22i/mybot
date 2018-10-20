@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mybot
+spec:
+  containers:
+  - name: mybot
+    image: prof222772/mybot:2
+    env:
+      - name: TOKEN
+        valueFrom:
+          secretKeyRef:
+            name: token
+            key: token
