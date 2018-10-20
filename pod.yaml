@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: mybot
-    image: prof222772/mybot:2
+    image: prof222772/mybot:7
     env:
       - name: TOKEN
         valueFrom:
