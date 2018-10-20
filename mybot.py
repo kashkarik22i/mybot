@@ -44,14 +44,11 @@ def help(bot, update):
 def echo(bot, update):
     """Echo the user message."""
     text = update.message.text
-    logger.error(text)
-    logger.error(type(text))
-    print text
-    print type(text)
-    if re.match("[аеиоyыэюя]", str(text), flags=re.U):
-        res = "Все говорят " + text + ", a ты купи слона"
+    logger.info(u"Got text: " + text)
+    if re.match(u".*[аеиоyыэюя].*", text, flags=re.UNICODE):
+        res = u"Все говорят " + text + u", a ты купи слона"
     else:
-        res = text + "? who cares?! Give me your soul!:)"
+        res = text + u"? who cares?! Give me your soul!:)"
     update.message.reply_text(res)
 
 
