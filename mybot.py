@@ -45,7 +45,7 @@ def echo(bot, update):
     """Echo the user message."""
     text = update.message.text
     logger.info(u"Got text: " + text)
-    if re.match(u".*[аеиоyыэюя].*", text, flags=re.UNICODE):
+    if re.match(u".*[аеиоуыэюя].*", text, flags=re.UNICODE):
         res = u"Все говорят " + text + u", a ты купи слона"
     else:
         res = text + u"? who cares?! Give me your soul!:)"
