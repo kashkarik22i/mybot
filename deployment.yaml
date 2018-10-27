@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mybot
+  labels:
+    app: mybot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mybot
+  template:
+    metadata:
+      labels:
+        app: mybot
+    spec:
+      containers:
+      - name: mybot
+        image: prof222772/mybot:7
+        env:
+          - name: TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: token
+                key: token
