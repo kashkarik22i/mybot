@@ -6,6 +6,6 @@ def get_response(msg: str, chat_id: str) -> str:
     """
 
     msg_parsed = NLU().parse(msg)
-    move = DialogManager().get_next_move(msg_parsed, chat_id)
+    move = DialogManager().get_next_move(msg_parsed)
 
-    return NLG().make_answer(move, chat_id)
+    return NLG().make_answer(move)
