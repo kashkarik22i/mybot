@@ -2,7 +2,7 @@ from flask import Flask, request
 import telegram
 from telebot.credentials import bot_token, bot_user_name,URL
 from telebot.mastermind import get_response
-
+from google.cloud import firestore
 
 global bot
 global TOKEN
@@ -24,6 +24,15 @@ def respond():
     print("got text message :", text)
 
     response = get_response(text)
+
+    db = firestore.Client()
+    doc_ref = db.collection('requests').document(str(msg_id))
+    doc_ref.set({
+      'text': text,
+      'chat_id': chat_id,
+      'response': response
+    })
+
     bot.sendMessage(chat_id=chat_id, text=response, reply_to_message_id=msg_id)
 
     return 'ok'
