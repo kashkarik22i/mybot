@@ -18,6 +18,7 @@ def respond():
 
     chat_id = update.message.chat.id
     msg_id = update.message.message_id
+    date = str(update.message.date)
 
     # Telegram understands UTF-8, so encode text for unicode compatibility
     text = update.message.text.encode('utf-8').decode()
@@ -30,6 +31,7 @@ def respond():
     doc_ref.set({
       'text': text,
       'chat_id': chat_id,
+      'date': date,
       'response': response
     })
 
