@@ -1,4 +1,4 @@
-def get_response(msg: str, chat_id: str) -> str:
+def get_response(msg: str) -> str:
     """
     you can place your mastermind AI here
     could be a very basic simple response like "معلش"
