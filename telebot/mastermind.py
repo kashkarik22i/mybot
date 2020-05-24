@@ -1,6 +1,6 @@
-import nlg.generator
-import nlu.analyzer
-import dialog.dialogmanager
+import telebot.nlg.generator
+import telebot.nlu.analyzer
+import telebot.dialog.dialogmanager
 
 def get_response(msg: str) -> str:
     """
