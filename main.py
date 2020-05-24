@@ -26,7 +26,7 @@ def respond():
     response = get_response(text)
 
     db = firestore.Client()
-    doc_ref = db.collection('requests').document(msg_id)
+    doc_ref = db.collection('requests').document(str(msg_id))
     doc_ref.set({
       'text': text,
       'chat_id': chat_id,
