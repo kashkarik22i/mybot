@@ -1,7 +1,11 @@
-def get_response(msg):
+def get_response(msg: str, chat_id: str) -> str:
     """
     you can place your mastermind AI here
     could be a very basic simple response like "معلش"
-    or a complex LSTM network that generate appropriate answer
+    or a complex LSTM network that generates appropriate answer
     """
-    return "معلش !"
+
+    msg_parsed = NLU().parse(msg)
+    move = DialogManager().get_next_move(msg_parsed, chat_id)
+
+    return NLG().make_answer(move, chat_id)
