@@ -1,3 +1,7 @@
+import nlg.generator
+import nlu.analyzer
+import dialog.dialogmanager
+
 def get_response(msg: str) -> str:
     """
     you can place your mastermind AI here
