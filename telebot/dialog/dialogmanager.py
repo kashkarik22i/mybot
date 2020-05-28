@@ -1,12 +1,19 @@
 class DialogManager:
-    def get_next_move(self, msg_obj):
-        msg, intent, score = msg_obj
-        if score > 0.9 and intent == 'hello':
+    def get_next_move(self, msg):
+        if "intent" in msg and msg["intent"] == 'hello':
             return "start"
         goodbyes = {"bye", "goodbye", "farewell", "ciao", "see you", "until later", "talk to you later"}
-        if msg.endswith("start"):
+        msg_text = msg.get("text")
+        if msg_text.endswith("start"):
             return "start"
-        elif msg.lower() in set({v.lower() : v for v in goodbyes}.values()):
+        elif msg_text.lower() in set({v.lower() : v for v in goodbyes}.values()):
             return "end"
+        elif len(msg.get("mood")) > 0:
+            self.save_mood_to_db(msg.get("mood"))
+            return "next"
         else:
             return "next"
+
+
+    def save_mood_to_db(self, mood):
+        return
