@@ -1,13 +1,14 @@
 from conversation.external.dflow import detect_intent_texts
 
-LANGUAGE = "en_US"
-
 class NLU:
-    def parse(self, msg:str):
-        intent, score = detect_intent_texts(msg, LANGUAGE)
+    def parse(self, msg:str, language):
+        intent, score = detect_intent_texts(msg, language)
         if score > 0.9:
+            # start using logger soon
+            print("using dialogflow: got intent {} and score {}".format(intent, score))
             return {"text": self.preprocess(msg), "mood" : self.parse_mood(msg), "intent": intent}
         else:
+            print("NOT using dialogflow: got intent {} and score {}".format(intent, score))
             return {"text": self.preprocess(msg), "mood" : self.parse_mood(msg)}
 
     def parse_mood(self, msg:str):

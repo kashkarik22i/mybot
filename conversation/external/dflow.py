@@ -3,6 +3,7 @@ import uuid
 from conversation.secrets import PROJECT_ID
 
 def detect_intent_texts(text, language_code):
+    print("language for dialogflow {}".format(language_code))
     session_id = str(uuid.uuid4())
     session_client = dialogflow.SessionsClient()
     session = session_client.session_path(PROJECT_ID, session_id)

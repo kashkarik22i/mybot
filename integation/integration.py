@@ -28,7 +28,7 @@ def process_json(js):
             send_message(last_message=message, response=response)
     except Exception:
         log_error()
-        raise 
+        raise
 
 def connect():
     tgram_connect()
