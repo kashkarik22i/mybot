@@ -19,12 +19,19 @@ class FullTestConversation(unittest.TestCase):
         message["text"] = 'хало блин'
         self.assertEqual(get_response(message), 'Hello!')
 
+    def test_mood_en_language(self):
+        sleep(1) # need in order for API limits not to be reached yet
+        message = self._create_message()
+        message["text"] = "I feel moody"
+        self.assertEqual(get_response(message), 'Hello!')
+
     def _create_message(self):
         return {"chat_id": 1,
                 "msg_id": 1,
                 "date": datetime.now(),
                 "text": "hello",
-                "language": "en"}
+                "language": "en",
+                "ignore_dialogflow": "ignored"}
 
 if __name__ == '__main__':
     unittest.main()

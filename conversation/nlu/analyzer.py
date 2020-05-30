@@ -1,15 +1,20 @@
 from conversation.external.dflow import detect_intent_texts
 
 class NLU:
-    def parse(self, msg:str, language):
-        intent, score = detect_intent_texts(msg, language)
-        if score > 0.9:
-            # start using logger soon
-            print("using dialogflow: got intent {} and score {}".format(intent, score))
-            return {"text": self.preprocess(msg), "mood" : self.parse_mood(msg), "intent": intent}
-        else:
-            print("NOT using dialogflow: got intent {} and score {}".format(intent, score))
-            return {"text": self.preprocess(msg), "mood" : self.parse_mood(msg)}
+    def parse(self, msg_obj):
+        # Ilya made this super ugly:)
+        msg = msg_obj["text"]
+        language = msg_obj["language"]
+        if "ignore_dialogflow" not in msg_obj: # hack for testing for now
+            intent, score = detect_intent_texts(msg, language)
+            if score > 0.9:
+                # start using logger soon
+                print("using dialogflow: got intent {} and score {}".format(intent, score))
+                return {"text": self.preprocess(msg), "mood" : self.parse_mood(msg), "intent": intent}
+            else:
+                print("NOT using dialogflow: got intent {} and score {}".format(intent, score))
+        print("NOT using dialogflow")
+        return {"text": self.preprocess(msg), "mood" : self.parse_mood(msg)}
 
     def parse_mood(self, msg:str):
         mood_markers = ["i'm", "i am", "i feel", "it feels like"]
