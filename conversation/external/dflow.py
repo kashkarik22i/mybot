@@ -1,27 +1,16 @@
+import dialogflow_v2 as dialogflow
+import uuid
+from conversation.secrets import PROJECT_ID
+
 def detect_intent_texts(text, language_code):
-    project_id = 'massive-rock-278120' 
-    #project_id = 'newagent-ykcdro'
-    import uuid
     session_id = str(uuid.uuid4())
-    import dialogflow_v2 as dialogflow
     session_client = dialogflow.SessionsClient()
-
-    session = session_client.session_path(project_id, session_id)
-    #print('Session path: {}\n'.format(session))
-
+    session = session_client.session_path(PROJECT_ID, session_id)
     text_input = dialogflow.types.TextInput(
         text=text, language_code=language_code)
-
     query_input = dialogflow.types.QueryInput(text=text_input)
- 
     response = session_client.detect_intent(
         session=session, query_input=query_input)
-
-    #print('=' * 20)
-    #print('Query text: {}'.format(response.query_result.query_text))
-    #print('Detected intent: {} (confidence: {})\n'.format(
-    #    response.query_result.intent.display_name,
-    #    response.query_result.intent_detection_confidence))
     #print('Fulfillment text: {}\n'.format(
     #    response.query_result.fulfillment_text))
     return response.query_result.intent.display_name, response.query_result.intent_detection_confidence

@@ -1,5 +1,5 @@
 import unittest
-from telebot.dialog.dialogmanager import DialogManager
+from conversation.dialog.dialogmanager import DialogManager
 
 class test_dialogmanager(unittest.TestCase):
 

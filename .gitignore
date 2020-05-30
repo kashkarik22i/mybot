@@ -105,6 +105,6 @@ venv.bak/
 
 .idea
 
-telebot/credentials.py
+conversation/secrets.py
 .DS_Store
 data/

@@ -1,4 +1,4 @@
-from telebot.external.dflow import detect_intent_texts
+from conversation.external.dflow import detect_intent_texts
 
 LANGUAGE = "en_US"
 

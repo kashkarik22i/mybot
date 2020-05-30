@@ -1,5 +1,5 @@
 import unittest
-from telebot.nlg.generator import NLG
+from conversation.nlg.generator import NLG
 
 class TestGenerator(unittest.TestCase):
 
