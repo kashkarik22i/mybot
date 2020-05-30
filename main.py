@@ -1,4 +1,5 @@
 from flask import Flask, request
+import traceback
 from conversation.secrets import TOKEN
 from integation.integration import process_json, connect
 
@@ -6,7 +7,13 @@ app = Flask(__name__)
 
 @app.route('/{}'.format(TOKEN), methods=['POST'])
 def respond():
-    process_json(request.get_json(force=True))
+    try:
+        process_json(request.get_json(force=True))
+    except Exception:
+        # TODO this is not amazing, but avoids repeated messages
+        # answering later IMO does not make sense for this bot yet
+        error_message = traceback.format_exc()
+        print(error_message)
     return 'ok'
 
 @app.route('/connect', methods=['GET', 'POST'])

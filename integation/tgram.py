@@ -15,6 +15,7 @@ def connect():
 
 def parse_message(js):
     update = telegram.Update.de_json(js, bot)
+    # TODO, add update.update_id and use it to identify repeated broken messages
     chat_id = update.message.chat.id
     msg_id = update.message.message_id
     date = update.message.date
