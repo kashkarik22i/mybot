@@ -26,7 +26,7 @@ def log_response(message, response):
 
 def log_error():
     db = firestore.Client()
-    doc_ref = db.collection('responses').document(str(uuid.uuid4()))
+    doc_ref = db.collection('errors').document(str(uuid.uuid4()))
     error_message = traceback.format_exc()
     doc_ref.set({
       'text': str(error_message),
