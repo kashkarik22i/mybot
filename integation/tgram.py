@@ -19,12 +19,15 @@ def parse_message(js):
     msg_id = update.message.message_id
     date = update.message.date
     text = update.message.text.encode('utf-8').decode()
+    language = update.message.from_user.language_code
+    print("language: ", language)
     print("got text message :", text)
     # todo use proper object
     return {"chat_id": chat_id,
             "msg_id": msg_id,
             "date": date,
-            "text": text}
+            "text": text,
+            "language": language}
 
 def send_message(last_message, response, reply=False):
     chat_id = last_message["chat_id"]
