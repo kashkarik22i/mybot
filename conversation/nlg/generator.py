@@ -5,5 +5,7 @@ class NLG:
             return "Hello!"
         elif move == "end":
             return "Bye!"
+        elif move == "mood":
+            return "So that's how you're feeling..."
         else:
             return "Nice! =)"
