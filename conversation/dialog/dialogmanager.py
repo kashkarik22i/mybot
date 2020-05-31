@@ -4,6 +4,9 @@ class DialogManager:
     def get_next_move(self, msg):
         if "intent" in msg and msg["intent"] == 'hello':
             return "start"
+        if "intent" in msg and msg["intent"] == 'language':
+            lang = msg["slots"][0]
+            return "language" +  lang
         msg_text = msg.get("text")
         if msg_text.endswith("start"):
             return "start"
