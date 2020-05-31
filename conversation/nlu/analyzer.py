@@ -6,7 +6,9 @@ class NLU:
         msg = msg_obj["text"]
         language = msg_obj["language"]
         if "ignore_dialogflow" not in msg_obj: # hack for testing for now
-            intent, score = detect_intent_texts(msg, language)
+            intent_data = detect_intent_texts(msg, language)
+            intent = intent_data["intent"]
+            score = intent_data["score"]
             if score > 0.9:
                 # start using logger soon
                 print("using dialogflow: got intent {} and score {}".format(intent, score))

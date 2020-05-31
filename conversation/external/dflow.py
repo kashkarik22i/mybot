@@ -12,9 +12,9 @@ def detect_intent_texts(text, language_code):
     query_input = dialogflow.types.QueryInput(text=text_input)
     response = session_client.detect_intent(
         session=session, query_input=query_input)
-    #print('Fulfillment text: {}\n'.format(
-    #    response.query_result.fulfillment_text))
-    return response.query_result.intent.display_name, response.query_result.intent_detection_confidence
+    return {"intent": response.query_result.intent.display_name,
+            "score": response.query_result.intent_detection_confidence,
+            "slots": [(x[0], x[1].string_value) for x in response.query_result.parameters.fields.items()]}
 
 if __name__ == "__main__":
-  detect_intent_texts("hi", "en_US")
+  print(detect_intent_texts("change to russian", "en_US"))
