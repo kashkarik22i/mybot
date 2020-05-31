@@ -23,7 +23,7 @@ class FullTestConversation(unittest.TestCase):
         sleep(1) # need in order for API limits not to be reached yet
         message = self._create_message()
         message["text"] = "I feel moody"
-        self.assertEqual(get_response(message), 'Hello!')
+        self.assertEqual(get_response(message), "So that's how you're feeling...")
 
     def _create_message(self):
         return {"chat_id": 1,

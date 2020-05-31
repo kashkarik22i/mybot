@@ -1,4 +1,5 @@
 from conversation.external.dflow import detect_intent_texts
+import os.path
 
 class NLU:
     def parse(self, msg_obj):
@@ -16,13 +17,13 @@ class NLU:
         print("NOT using dialogflow")
         return {"text": self.preprocess(msg), "mood" : self.parse_mood(msg)}
 
-    def parse_mood(self, msg:str):
+    def parse_mood(self, msg_text:str):
         mood_markers = ["i'm", "i am", "i feel", "it feels like"]
-        is_mood = any([x in msg.casefold() for x in mood_markers])
+        is_mood = any([x in msg_text.casefold() for x in mood_markers])
         if is_mood:
-            is_negated =  any([x in msg.casefold() for x in ["not", "no", "don't"]])
+            is_negated =  any([x in msg_text.casefold() for x in ["not", "no", "don't"]])
             for feeling in ["positive", "negative", "neutral"]:
-                if (self.is_feeling(msg, feeling) and not is_negated):
+                if (self.is_feeling(msg_text, feeling) and not is_negated):
                     return feeling
                 elif is_negated and feeling == "positive":
                     return "negative"
@@ -30,10 +31,13 @@ class NLU:
                     return "positive"
         return ""
 
-    def is_feeling(self, msg, feeling):
-        with open("/resources/"+feeling) as f:
+    def is_feeling(self, msg_text, feeling):
+        file_path = os.path.join(os.path.dirname(__file__), '..','resources', feeling)
+        print (file_path)
+        with open(file_path) as f:
             result = [x.strip() for x in f.readlines()]
-        return any([x in msg.casefold() for x in result])
+        print(result)
+        return any([x in msg_text.casefold() for x in result])
 
     def preprocess(self, msg:str):
         return msg
