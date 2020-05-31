@@ -10,11 +10,14 @@ class FullTestConversation(unittest.TestCase):
 
     def test_hello_en_language(self):
         sleep(1) # need in order for API limits not to be reached yet
-        self.assertEqual(get_response(self._create_message()), 'Hello!')
+        message = self._create_message()
+        self.add_dialog_flow(message)
+        self.assertEqual(get_response(message), 'Hello!')
 
     def test_hello_ru_language(self):
         sleep(1) # need in order for API limits not to be reached yet
         message = self._create_message()
+        self.add_dialog_flow(message)
         message["language"] = 'ru'
         message["text"] = 'хало блин'
         self.assertEqual(get_response(message), 'Hello!')
@@ -24,6 +27,9 @@ class FullTestConversation(unittest.TestCase):
         message = self._create_message()
         message["text"] = "I feel moody"
         self.assertEqual(get_response(message), 'Hello!')
+
+    def add_dialog_flow(self, message):
+        del message["ignore_dialogflow"]
 
     def _create_message(self):
         return {"chat_id": 1,
