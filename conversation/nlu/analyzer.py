@@ -15,7 +15,7 @@ class NLU:
             slots = intent_data["slots"]
             if intent == "language":
                 slots = self.convert_language(slots=slots)
-            if score > 0.8 and not intent == "Default Fallback Intent":
+            if score > 0.65 and not intent == "Default Fallback Intent":
                 # start using logger soon
                 print("using dialogflow: got intent {} and score {}".format(intent, score))
                 return {"text": self.preprocess(msg),

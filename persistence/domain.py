@@ -33,4 +33,4 @@ def get_moods_in_range(message, from_date, to_date=None):
 
 if __name__ == "__main__":
     time = datetime.utcnow()
-    print(get_moods_in_range({"chat_id": "798772222"}, time - timedelta(minutes = 15)))
+    print(get_moods_in_range({"chat_id": "798772222"}, time - timedelta(minutes = 120)))
