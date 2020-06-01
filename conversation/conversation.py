@@ -11,4 +11,4 @@ def get_response(msg) -> str:
     move = DialogManager().get_next_move(msg_parsed)
     act_on_move(msg, move)
 
-    return NLG().make_answer(move)
+    return NLG().make_answer(move, language)

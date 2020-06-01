@@ -1,4 +1,5 @@
 from conversation.external.dflow import detect_intent_texts
+from conversation.nlu.languages import name_to_code
 import os.path
 
 class NLU:
@@ -10,6 +11,8 @@ class NLU:
             intent = intent_data["intent"]
             score = intent_data["score"]
             slots = intent_data["slots"]
+            if intent == "language":
+                slots = self.convert_language(slots=slots)
             if score > 0.9:
                 # start using logger soon
                 print("using dialogflow: got intent {} and score {}".format(intent, score))
@@ -47,3 +50,6 @@ class NLU:
 
     def preprocess(self, msg:str):
         return msg
+
+    def convert_language(self, slots):
+         return [(slot[0], name_to_code(slot[1])) for slot in slots]

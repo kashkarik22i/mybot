@@ -11,17 +11,25 @@ class FullTestConversation(unittest.TestCase):
 
     def test_hello_en_language(self):
         message = self._create_message()
-        save_chat_language(message, "english")
+        save_chat_language(message, "rn")
         self.add_dialog_flow(message)
         self.assertEqual(get_response(message), 'Hello!')
 
     def test_hello_ru_language(self):
         message = self._create_message()
-        save_chat_language(message, "russian")
+        save_chat_language(message, "ru")
         self.add_dialog_flow(message)
         message["language"] = 'ignore'
-        message["text"] = 'хало блин'
+        message["text"] = 'привет'
         self.assertEqual(get_response(message), 'Hello!')
+
+    def test_wrong_language(self):
+        message = self._create_message()
+        save_chat_language(message, "ru")
+        self.add_dialog_flow(message)
+        message["language"] = 'ru'
+        message["text"] = 'hi'
+        self.assertTrue(get_response(message).startswith('I am not super smart'))
 
     def test_mood_en_language(self):
         message = self._create_message()
@@ -31,20 +39,20 @@ class FullTestConversation(unittest.TestCase):
 
     def test_switch_language_en(self):
         message = self._create_message()
-        save_chat_language(message, "english")
+        save_chat_language(message, "en")
         self.add_dialog_flow(message)
         message["language"] = 'en' # this is just default just in case
         message["text"] = 'change to russian'
-        self.assertEqual(get_response(message), 'switched language setting russian')
+        self.assertEqual(get_response(message), 'i will switch to russian now')
         self.assertEqual(get_chat_language(message), "ru")
 
     def test_switch_language_ru(self):
         message = self._create_message()
-        save_chat_language(message, "russian")
+        save_chat_language(message, "ru")
         self.add_dialog_flow(message)
         message["language"] = 'en' # default is not what user uses, why not...
-        message["text"] = 'смени язык на english'
-        self.assertEqual(get_response(message), 'switched language setting english')
+        message["text"] = 'смени язык на английский'
+        self.assertEqual(get_response(message), 'меняю язык на английский')
         self.assertEqual(get_chat_language(message), "en")
 
     def add_dialog_flow(self, message):
