@@ -7,6 +7,8 @@ class DialogManager:
         if "intent" in msg and msg["intent"] == 'language':
             lang = msg["slots"][0][1]
             return {"move": "language", "language": lang}
+        if "intent" in msg and msg["intent"] == 'get_mood':
+            return {"move": 'get_mood', "get_mood": "week"}
         msg_text = msg.get("text")
         if msg_text.endswith("start"):
             return {"move": "start"}

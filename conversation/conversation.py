@@ -13,6 +13,6 @@ def get_response(msg) -> str:
     msg_parsed = NLU().parse(msg, language)
     move = DialogManager().get_next_move(msg_parsed)
     print("detected move {move}".format(move=move["move"]))
-    act_on_move(msg, move)
+    action = act_on_move(msg, move)
 
-    return NLG().make_answer(move, language)
+    return NLG().make_answer(move, language, action)

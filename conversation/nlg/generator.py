@@ -3,7 +3,7 @@ import random
 
 class NLG:
     """ A class that translates moves into textual responces"""
-    def make_answer(self, move_obj, language):
+    def make_answer(self, move_obj, language, action=None):
         move = move_obj["move"]
         if move == "mood":
             return random.choice(NLG.intents_to_utterances[language][move + " " + move_obj["mood"]])
@@ -11,6 +11,9 @@ class NLG:
             return random.choice(NLG.intents_to_utterances[language][move])
         elif "language" in move_obj:
             return self.utter_language_switch(language, move_obj["language"])
+        elif action is not None:
+            # super hacky just to test now
+            return "\n".join([a["text"] for a in action])
         else:
             return "I am not super smart, I did't not understand you. But you can always ask me to explain what I can and cannot do for you"
 

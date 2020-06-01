@@ -8,6 +8,10 @@ class NLU:
     def parse(self, msg_obj, language):
         # Ilya made this super ugly:)
         msg = msg_obj["text"]
+        if "show me" in msg:
+            return {"text": self.preprocess(msg),
+                    "msg_obj": msg_obj,
+                    "intent": "get_mood"}
         if "ignore_dialogflow" not in msg_obj: # hack for testing for now
             intent_data = detect_intent_texts(msg, language)
             intent = intent_data["intent"]
