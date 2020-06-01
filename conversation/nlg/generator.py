@@ -17,7 +17,7 @@ class NLG:
         elif "language" in move_obj:
             return self.utter_language_switch(language, move_obj["language"])
         else:
-            return "I am not super smart, I did't not understand you. But you can alwasy ask me to explain what I can and cannot do for you"
+            return "I am not super smart, I did't not understand you. But you can always ask me to explain what I can and cannot do for you"
 
     # this simple bullshit can be fully implemented in dialogflow without this ugly hacky code
     def utter_language_switch(self, language, new_language):
@@ -26,4 +26,4 @@ class NLG:
         if language == "ru":
             return "меняю язык на {language}".format(language=code_to_name(language, new_language))
         if language == "de":
-            return "jetzt werde ich {language} spreched".format(language=code_to_name(language, new_language))
+            return "jetzt werde ich {language} sprechen".format(language=code_to_name(language, new_language))
