@@ -11,9 +11,9 @@ class FullTestConversation(unittest.TestCase):
 
     def test_hello_en_language(self):
         message = self._create_message()
-        save_chat_language(message, "rn")
+        save_chat_language(message, "en")
         self.add_dialog_flow(message)
-        self.assertEqual(get_response(message), 'Hello!')
+        self.assertIn(get_response(message), ["Hello!", "Hi there!", "What's up?", "Nice to see you!", "Hello dear!"])
 
     def test_hello_ru_language(self):
         message = self._create_message()
@@ -21,7 +21,7 @@ class FullTestConversation(unittest.TestCase):
         self.add_dialog_flow(message)
         message["language"] = 'ignore'
         message["text"] = 'привет'
-        self.assertEqual(get_response(message), 'Hello!')
+        self.assertIn(get_response(message), ["Привет!", "Здорово!", "Че каво?", "Здравствуй!", "Привет тебе!"])
 
     def test_wrong_language(self):
         message = self._create_message()
@@ -36,7 +36,7 @@ class FullTestConversation(unittest.TestCase):
         save_chat_language(message, "en")
         message["text"] = "I feel moody"
         self.add_dialog_flow(message)
-        self.assertEqual(get_response(message), "I'm sorry to hear that.")
+        self.assertIn(get_response(message), ["What a pity", "I'm sorry to hear that.", "So sad."])
 
     def test_switch_language_en(self):
         message = self._create_message()
