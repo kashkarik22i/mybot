@@ -1,6 +1,8 @@
-from conversation.external.dflow import detect_intent_texts
-from conversation.nlu.languages import name_to_code
 import os.path
+
+from conversation.external.dflow import detect_intent_texts
+from conversation.languages import name_to_code
+
 
 class NLU:
     def parse(self, msg_obj, language):
@@ -13,7 +15,7 @@ class NLU:
             slots = intent_data["slots"]
             if intent == "language":
                 slots = self.convert_language(slots=slots)
-            if score > 0.9 and not intent == "Default Fallback Intent":
+            if score > 0.8 and not intent == "Default Fallback Intent":
                 # start using logger soon
                 print("using dialogflow: got intent {} and score {}".format(intent, score))
                 return {"text": self.preprocess(msg),

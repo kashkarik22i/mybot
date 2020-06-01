@@ -1,4 +1,4 @@
-from conversation.nlu.languages import code_to_name
+from conversation.languages import code_to_name
 import random
 
 class NLG:
