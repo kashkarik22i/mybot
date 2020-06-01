@@ -60,7 +60,9 @@ def name_to_code(language):
         return "en"
     elif language == 'по-английски':
         return "en"
-    elif language == 'по английски':
+    elif language == 'английски':
+        return "en"
+    elif language == 'английском':
         return "en"
     if language == 'german':
         return "de"

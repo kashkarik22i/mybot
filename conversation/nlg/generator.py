@@ -1,4 +1,4 @@
-from conversation.nlu.languages import code_to_name
+from conversation.languages import code_to_name
 
 class NLG:
     """ A class that translates moves into textual responces"""
