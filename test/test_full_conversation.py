@@ -36,6 +36,20 @@ class FullTestConversation(unittest.TestCase):
         self.add_dialog_flow(message)
         self.assertIn(get_response(message), ["What a pity", "I'm sorry to hear that.", "So sad."])
 
+    def test_mood_en_language_amazing(self):
+        message = self._create_message()
+        save_chat_language(message, "en")
+        message["text"] = "I feel amazing now because this shit works"
+        self.add_dialog_flow(message)
+        self.assertIn(get_response(message), ["Nice to hear that!", "I'm happy for you!", "Great news!"])
+
+    def test_mood_en_language_amazing_negation(self):
+        message = self._create_message()
+        save_chat_language(message, "en")
+        message["text"] = "I don't feel amazing"
+        self.add_dialog_flow(message)
+        self.assertIn(get_response(message), ["What a pity", "I'm sorry to hear that.", "So sad."])
+
     def test_switch_language_en(self):
         message = self._create_message()
         save_chat_language(message, "en")
