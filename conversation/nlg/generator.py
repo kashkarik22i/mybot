@@ -14,4 +14,4 @@ class NLG:
         elif "language" in move:
             return "switched language setting"
         else:
-            return "Nice! =)"
+            return "Let's talk about it."
