@@ -2,7 +2,7 @@ import unittest
 from time import sleep
 from conversation.conversation import get_response
 from datetime import datetime
-from persistence.chats import get_chat_language, save_chat_language
+from persistence.settings import get_chat_language, save_chat_language
 
 # only runs when env var is set up correctly to assess GCP services, e.g. dialogflow
 # export GOOGLE_APPLICATION_CREDENTIALS=~/Documents/work/projects/mybot/data/credentials/key
@@ -19,7 +19,6 @@ class FullTestConversation(unittest.TestCase):
         message = self._create_message()
         save_chat_language(message, "ru")
         self.add_dialog_flow(message)
-        message["language"] = 'ignore'
         message["text"] = 'привет'
         self.assertIn(get_response(message), ["Привет!", "Здорово!", "Че каво?", "Здравствуй!", "Привет тебе!"])
 
@@ -27,7 +26,6 @@ class FullTestConversation(unittest.TestCase):
         message = self._create_message()
         save_chat_language(message, "ru")
         self.add_dialog_flow(message)
-        message["language"] = 'ru'
         message["text"] = 'hi'
         self.assertTrue(get_response(message).startswith('I am not super smart'))
 
@@ -42,7 +40,6 @@ class FullTestConversation(unittest.TestCase):
         message = self._create_message()
         save_chat_language(message, "en")
         self.add_dialog_flow(message)
-        message["language"] = 'en' # this is just default just in case
         message["text"] = 'change to russian'
         self.assertEqual(get_response(message), 'i will switch to russian now')
         self.assertEqual(get_chat_language(message), "ru")
@@ -51,7 +48,6 @@ class FullTestConversation(unittest.TestCase):
         message = self._create_message()
         save_chat_language(message, "ru")
         self.add_dialog_flow(message)
-        message["language"] = 'en' # default is not what user uses, why not...
         message["text"] = 'смени язык на английский'
         self.assertEqual(get_response(message), 'меняю язык на английский')
         self.assertEqual(get_chat_language(message), "en")

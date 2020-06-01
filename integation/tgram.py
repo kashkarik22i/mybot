@@ -22,8 +22,8 @@ def parse_message(js):
     text = update.message.text.encode('utf-8').decode()
     language = update.message.from_user.language_code
     # todo use proper object
-    return {"chat_id": chat_id,
-            "msg_id": msg_id,
+    return {"chat_id": str(chat_id),
+            "msg_id": str(msg_id),
             "date": date,
             "text": text,
             "language": language}

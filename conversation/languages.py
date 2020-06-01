@@ -1,13 +1,15 @@
-from persistence.chats import get_chat_language
+from persistence.settings import get_chat_language
 
 def detect_language(message):
     stored_language = get_chat_language(message)
     if stored_language:
         print("using saved language {}".format(stored_language))
-        return stored_language
+        result = stored_language
     else:
         print("using language as in user settings {}".format(message["language"]))
-        return message["language"]
+        result = message["language"]
+    del message["language"]
+    return result
 
 
 def code_to_name(language, code):
