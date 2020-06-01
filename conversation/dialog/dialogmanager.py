@@ -14,7 +14,7 @@ class DialogManager:
             return "end"
         elif len(msg.get("mood")) > 0:
             self.save_mood_to_db(msg.get("mood"))
-            return "mood"
+            return "mood" + msg.get("mood")
         else:
             return "next"
 

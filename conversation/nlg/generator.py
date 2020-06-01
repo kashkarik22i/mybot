@@ -5,8 +5,12 @@ class NLG:
             return "Hello!"
         elif move == "end":
             return "Bye!"
-        elif move == "mood":
-            return "So that's how you're feeling..."
+        elif move == "mood positive":
+            return "Nice!"
+        elif move == "mood neutral":
+            return "OK"
+        elif move == "mood negative":
+            return "I'm sorry to hear that."
         elif "language" in move:
             return "switched language setting"
         else:
