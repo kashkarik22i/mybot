@@ -17,7 +17,7 @@ class TestGenerator(unittest.TestCase):
         self.assertEqual(NLG().make_answer({"move": "mood", "mood": "neutral"}, "en"), 'OK')
 
     def test_next(self):
-        self.assertEqual(NLG().make_answer("next"), "Let's talk about it.")
+        self.assertTrue(NLG().make_answer({"move": "next"}, "en").startswith("I am not super smart"))
 
 if __name__ == '__main__':
     unittest.main()
