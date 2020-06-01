@@ -13,7 +13,11 @@ class NLU:
             if score > 0.9:
                 # start using logger soon
                 print("using dialogflow: got intent {} and score {}".format(intent, score))
-                return {"text": self.preprocess(msg), "mood" : self.parse_mood(msg), "intent": intent, "slots": slots}
+                return {"text": self.preprocess(msg),
+                        "mood" : self.parse_mood(msg),
+                        "msg_obj": msg_obj,
+                        "intent": intent,
+                        "slots": slots}
             else:
                 print("NOT using dialogflow: got intent {} and score {}".format(intent, score))
         print("NOT using dialogflow")

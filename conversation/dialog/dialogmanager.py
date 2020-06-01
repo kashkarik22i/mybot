@@ -5,20 +5,20 @@ class DialogManager:
 
     def get_next_move(self, msg):
         if "intent" in msg and msg["intent"] == 'hello':
-            return "start"
+            return {"move": "start"}
         if "intent" in msg and msg["intent"] == 'language':
             lang = msg["slots"][0][1]
-            return "language" +  lang
+            return {"move": "language", "language": lang}
         msg_text = msg.get("text")
         if msg_text.endswith("start"):
-            return "start"
+            return {"move": "start"}
         elif msg_text.lower() in DialogManager.goodbyes:
-            return "end"
-        elif msg.get("mood"):
+            return {"move": "end"}
+        elif "mood" in msg:
             self.save_mood_to_db(msg["msg_obj"], msg.get("mood"))
-            return "mood" + msg.get("mood")
+            return {"move": "mood", "mood": msg.get("mood")}
         else:
-            return "next"
+            return {"move": "next"}
 
     def save_mood_to_db(self, msg_obj, mood):
         save_mood(msg_obj, mood)
