@@ -8,7 +8,7 @@ def detect_language(message):
     else:
         print("using language as in user settings {}".format(message["language"]))
         result = message["language"]
-    del message["language"]
+    message["language"] = result
     return result
 
 

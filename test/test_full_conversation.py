@@ -59,7 +59,7 @@ class FullTestConversation(unittest.TestCase):
     def _create_message(self):
         return {"chat_id": 222772,
                 "msg_id": 1,
-                "date": datetime.now(),
+                "date": datetime.utcnow(),
                 "text": "hello",
                 "language": "en",
                 "ignore_dialogflow": "ignored"}

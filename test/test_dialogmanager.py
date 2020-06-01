@@ -25,7 +25,7 @@ class test_dialogmanager(unittest.TestCase):
         return {"chat_id": "222772",
                 "text": "does not matter",
                 "msg_id": "100500",
-                "date": datetime.now()}
+                "date": datetime.utcnow()}
 
 if __name__ == '__main__':
     unittest.main()

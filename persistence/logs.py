@@ -30,5 +30,5 @@ def log_error():
     error_message = traceback.format_exc()
     doc_ref.set({
       'text': str(error_message),
-      'date': str(datetime.now())
+      'date': datetime.utcnow()
     })
