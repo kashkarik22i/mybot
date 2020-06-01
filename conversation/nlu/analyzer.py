@@ -29,13 +29,14 @@ class NLU:
 
     def parse_mood(self, msg_text:str, language:str):
         mood_markers =  {
-            "en" : ["i'm", "i am", "i feel", "it feels like"],
+            "en" : ["i'm", "i am", "i feel", "i don't feel","it does not feel", "it doesn't feel", "it feels"],
             "de" : ["ich bin", "ich fühle", "mir geht"],
             "ru" : ["мне", "я", "зашибись"]
         }
         is_mood = any([x in msg_text.casefold() for x in mood_markers[language]])
         if is_mood:
-            is_negated =  any([x in msg_text.casefold() for x in ["not", "no", "don't", "nicht", "не"]])
+            matched = [x for x in [" not ", " no ", " don't ", " doesn't ", " nicht ", " kein ", " keine ", " не "] if x in msg_text.casefold()]
+            is_negated =  any(matched)
             for feeling in ["positive", "negative", "neutral"]:
                 if (self.is_feeling(msg_text, feeling) and not is_negated):
                     return feeling
@@ -52,7 +53,8 @@ class NLU:
             result = [x.strip() for x in f.readlines()]
         print(result)
         matching_words = [x for x in result if x in msg_text.casefold()]
-        print("found matching words:" + matching_words)
+        print("found matching words")
+        print(matching_words)
         return any(matching_words)
 
     def preprocess(self, msg:str):
