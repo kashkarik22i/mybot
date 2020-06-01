@@ -16,5 +16,8 @@ class TestGenerator(unittest.TestCase):
     def test_mood_neutral(self):
         self.assertEqual(NLG().make_answer("mood neutral"), 'OK')
 
+    def test_next(self):
+        self.assertEqual(NLG().make_answer("next"), "Let's talk about it.")
+
 if __name__ == '__main__':
     unittest.main()
