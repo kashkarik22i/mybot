@@ -5,7 +5,7 @@ def save_chat_language(message, language):
     doc_ref = db.collection('chats').document(str(message["chat_id"]))
     doc_ref.set({
       'text': message["text"],
-      'date': str(message["date"]),
+      'date': message["date"],
       'language': language
     })
 
@@ -18,7 +18,3 @@ def get_chat_language(message):
     else:
         return None
 
-
-if __name__ == "__main__":
-    save_chat_language({"chat_id": "798772222", "text": "change lang fake", "date": "2020-05-31 08:20:38"}, "russian")
-    print(get_chat_language({"chat_id": "798772222"}))

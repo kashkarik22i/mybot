@@ -9,7 +9,7 @@ def log_request(message):
     doc_ref.set({
       'text': message["text"],
       'chat_id': message["chat_id"],
-      'date': str(message["date"]),
+      'date': message["date"],
       'language': message["language"]
     })
 
@@ -19,7 +19,7 @@ def log_response(message, response):
     doc_ref.set({
       'text': message["text"],
       'chat_id': message["chat_id"],
-      'date': str(message["date"]),
+      'date': message["date"],
       'response': response,
       'language': message["language"]
     })

@@ -9,5 +9,5 @@ def save_mood(message, mood):
       'mood': mood,
       'msg_id': str(message["msg_id"]),
       'chat_id': message["chat_id"],
-      'date': str(message["date"])
+      'date': message["date"]
     })

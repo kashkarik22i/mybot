@@ -1,5 +1,3 @@
-from persistence.domain import save_mood
-
 class DialogManager:
     goodbyes = {"bye bye","bye", "goodbye", "farewell", "ciao","cu", "see u", "c u", "see you", "until later", "till later", "talk to you later"}
 
@@ -14,11 +12,8 @@ class DialogManager:
             return {"move": "start"}
         elif msg_text.lower() in DialogManager.goodbyes:
             return {"move": "end"}
-        elif "mood" in msg:
-            self.save_mood_to_db(msg["msg_obj"], msg.get("mood"))
+        elif "mood" in msg and msg.get("mood"):
             return {"move": "mood", "mood": msg.get("mood")}
         else:
             return {"move": "next"}
 
-    def save_mood_to_db(self, msg_obj, mood):
-        save_mood(msg_obj, mood)

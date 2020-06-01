@@ -33,6 +33,7 @@ class FullTestConversation(unittest.TestCase):
 
     def test_mood_en_language(self):
         message = self._create_message()
+        save_chat_language(message, "en")
         message["text"] = "I feel moody"
         self.add_dialog_flow(message)
         self.assertEqual(get_response(message), "I'm sorry to hear that.")
