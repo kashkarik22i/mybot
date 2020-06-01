@@ -25,13 +25,17 @@ class NLU:
             else:
                 print("NOT using dialogflow: got intent {} and score {}".format(intent, score))
         print("NOT using dialogflow")
-        return {"text": self.preprocess(msg), "mood" : self.parse_mood(msg), "msg_obj": msg_obj}
+        return {"text": self.preprocess(msg), "mood" : self.parse_mood(msg, language), "msg_obj": msg_obj}
 
-    def parse_mood(self, msg_text:str):
-        mood_markers = ["i'm", "i am", "i feel", "it feels like"]
-        is_mood = any([x in msg_text.casefold() for x in mood_markers])
+    def parse_mood(self, msg_text:str, language:str):
+        mood_markers =  {
+            "en" : ["i'm", "i am", "i feel", "it feels like"],
+            "de" : ["ich bin", "ich fühle", "mir geht"],
+            "ru" : ["мне", "я", "зашибись"]
+        }
+        is_mood = any([x in msg_text.casefold() for x in mood_markers[language]])
         if is_mood:
-            is_negated =  any([x in msg_text.casefold() for x in ["not", "no", "don't"]])
+            is_negated =  any([x in msg_text.casefold() for x in ["not", "no", "don't", "nicht", "не"]])
             for feeling in ["positive", "negative", "neutral"]:
                 if (self.is_feeling(msg_text, feeling) and not is_negated):
                     return feeling
@@ -47,7 +51,9 @@ class NLU:
         with open(file_path) as f:
             result = [x.strip() for x in f.readlines()]
         print(result)
-        return any([x in msg_text.casefold() for x in result])
+        matching_words = [x for x in result if x in msg_text.casefold()]
+        print("found matching words:" + matching_words)
+        return any(matching_words)
 
     def preprocess(self, msg:str):
         return msg
