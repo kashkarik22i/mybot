@@ -36,47 +36,4 @@ def code_to_name(language, code):
             return "deutsch"
     return None
 
-def name_to_code(language):
-    language = language.casefold()
-    if language == 'russian':
-        return "ru"
-    elif language == 'russisch':
-        return "ru"
-    elif language == 'ru':
-        return "ru"
-    elif language == 'русский':
-        return "ru"
-    elif language == 'по-русски':
-        return "ru"
-    elif language == 'по русски':
-        return "ru"
-    if language == 'english':
-        return "en"
-    elif language == 'englisch':
-        return "en"
-    elif language == 'englischem':
-        return "en"
-    elif language == 'en':
-        return "en"
-    elif language == 'английский':
-        return "en"
-    elif language == 'по-английски':
-        return "en"
-    elif language == 'английски':
-        return "en"
-    elif language == 'английском':
-        return "en"
-    if language == 'german':
-        return "de"
-    elif language == 'de':
-        return "de"
-    elif language == 'deutsch':
-        return "de"
-    elif language == 'немецкий':
-        return "de"
-    elif language == 'по-немецки':
-        return "de"
-    elif language == 'по немецки':
-        return "de"
-    else:
-        return None
+
