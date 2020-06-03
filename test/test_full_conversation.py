@@ -27,7 +27,8 @@ class FullTestConversation(unittest.TestCase):
         save_chat_language(message, "ru")
         self.add_dialog_flow(message)
         message["text"] = 'hi'
-        self.assertTrue(get_response(message).startswith('I am not super smart'))
+        self.assertIn(get_response(message), ["Я не понял, повтори по-другому", "Или я глупый или ты хочешь что-то чего я не умею",
+                        "Я не понял, ты всегда можешь спросить у меня что я умею а что нет"])
 
     def test_mood_en_language(self):
         message = self._create_message()

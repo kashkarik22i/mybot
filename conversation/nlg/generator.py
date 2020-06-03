@@ -19,7 +19,7 @@ class NLG:
         elif "language" in move_obj:
             return self.utter_language_switch(language, move_obj["language"])
         else:
-            return "I am not super smart, I did't not understand you. But you can always ask me to explain what I can and cannot do for you"
+            return random.choice(NLG.intents_to_utterances[language]["default"])
 
     # this simple bullshit can be fully implemented in dialogflow without this ugly hacky code
     def utter_language_switch(self, language, new_language):
