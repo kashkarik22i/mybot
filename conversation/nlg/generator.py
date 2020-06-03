@@ -18,6 +18,8 @@ class NLG:
             return random.choice(NLG.intents_to_utterances[language][move])
         elif "language" in move_obj:
             return self.utter_language_switch(language, move_obj["language"])
+        elif move == "help":
+            return random.choice(NLG.intents_to_utterances[language][move])
         else:
             return random.choice(NLG.intents_to_utterances[language]["default"])
 
@@ -38,6 +40,7 @@ class NLG:
             "mood positive" : ["Nice to hear that!", "I'm happy for you!", "Great news!"],
             "mood negative" : ["What a pity", "I'm sorry to hear that.", "So sad."],
             "mood neutral" : ["I got it", "I see", "OK"],
+            "help": ["Sure, you can tell me how you feel now and ask how you felt lately"],
             "default": ["I am not super smart, I did't not understand you. But you can always ask me to explain what I can and cannot do for you",
                         "I dod not understand you this time", "sorry, what?"]
         },
@@ -47,6 +50,7 @@ class NLG:
             "mood positive" : ["Хорошие новости!", "Я за тебя рад", "Приятно слышать"],
             "mood negative" : ["Жаль", "Увы", "Грустно", "Грустишка", "Что поделать..."],
             "mood neutral" : ["Понтяно", "Ясно", "Ок", "Угу"],
+            "help": ["Конечно, мы можешь мне рассказать как себя чувствуешь и что тебя беспокоит а потом спросить что тебя песпокоило последнее время"],
             "default": ["Я не понял, повтори по-другому", "Или я глупый или ты хочешь что-то чего я не умею",
                         "Я не понял, ты всегда можешь спросить у меня что я умею а что нет"]
         },
@@ -56,6 +60,7 @@ class NLG:
             "mood positive" : ["Wie nett!", "Gute Nachrichten!", "Toll!"],
             "mood negative" : ["Schade", "Es tut mir leid", "Ach du Arme!"],
             "mood neutral" : ["Jaha", "Jawohl", "Alles klar", "OK"],
+            "help": ["Naturlich, sag mir was dir storst oder frag nach dine laune letzte Woche"],
             "default": ["Entschuldige, ich habe dich nicht verstanden", "Leider, habe ich nicht verstanden, oder ich kann es nicht machen",
                         "Manchmal verstehe ich dich nicht, kanns du es umformulieren"]
         }

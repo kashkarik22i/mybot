@@ -6,6 +6,8 @@ class DialogManager:
             return {"move": "start"}
         if "intent" in msg and msg["intent"] == 'latest':
             return {"move": "get_mood", "get_mood": "non-empty"}
+        if "intent" in msg and msg["intent"] == 'help':
+            return {"move": "help"}
         if "intent" in msg and msg["intent"] == 'language':
             lang = msg["slots"][0][1]
             return {"move": "language", "language": lang}

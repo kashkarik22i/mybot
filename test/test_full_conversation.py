@@ -72,6 +72,13 @@ class FullTestConversation(unittest.TestCase):
         self.assertEqual(get_response(message), 'I will switch to russian now')
         self.assertEqual(get_chat_language(message), "ru")
 
+    def test_help_en(self):
+        message = self._create_message()
+        save_chat_language(message, "en")
+        self.add_dialog_flow(message)
+        message["text"] = 'help'
+        self.assertTrue("Sure," in get_response(message))
+
     def test_switch_language_ru(self):
         message = self._create_message()
         save_chat_language(message, "ru")

@@ -16,7 +16,8 @@ class TestGenerator(unittest.TestCase):
         self.assertIn(NLG().make_answer({"move": "mood", "mood": "neutral"}, "en"), ["I got it", "I see", "OK"])
 
     def test_next(self):
-        self.assertTrue(NLG().make_answer({"move": "next"}, "en").startswith("I am not super smart"))
+        self.assertIn(NLG().make_answer({"move": "next"}, "en"), ["I am not super smart, I did't not understand you. But you can always ask me to explain what I can and cannot do for you",
+                        "I dod not understand you this time", "sorry, what?"])
 
 if __name__ == '__main__':
     unittest.main()
