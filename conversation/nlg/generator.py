@@ -1,4 +1,3 @@
-from conversation.languages import code_to_name
 import random
 
 class NLG:
@@ -7,7 +6,12 @@ class NLG:
         move = move_obj["move"]
         if action is not None:
             # super hacky just to test now
-            return "\n".join([a["text"] for a in action])
+            if language == "en":
+                return "You told me the following recently:\n" + "\n".join([a["text"] for a in action])
+            if language == "ru":
+                return "Ты мне говорил следующее:\n" + "\n".join([a["text"] for a in action])
+            if language == "du":
+                return "Du hast mir das Folgenge in letzter Zeit gesagt:\n" + "\n".join([a["text"] for a in action])
         elif move == "mood":
             return random.choice(NLG.intents_to_utterances[language][move + " " + move_obj["mood"]])
         elif move != "language" and move != "next":
@@ -20,11 +24,11 @@ class NLG:
     # this simple bullshit can be fully implemented in dialogflow without this ugly hacky code
     def utter_language_switch(self, language, new_language):
         if language == "en":
-            return "i will switch to {language} now".format(language=code_to_name(language, new_language))
+            return "I will switch to {language} now".format(language=code_to_name(language, new_language))
         if language == "ru":
-            return "меняю язык на {language}".format(language=code_to_name(language, new_language))
+            return "Меняю язык на {language}".format(language=code_to_name(language, new_language))
         if language == "de":
-            return "jetzt werde ich {language} sprechen".format(language=code_to_name(language, new_language))
+            return "Ich werde jetzt {language} sprechen".format(language=code_to_name(language, new_language))
 
 
     intents_to_utterances = {
@@ -33,20 +37,51 @@ class NLG:
             "end" : ["Bye!", "Bye bye!", "See you!", "It was nice to talk to you.", "See you later!"],
             "mood positive" : ["Nice to hear that!", "I'm happy for you!", "Great news!"],
             "mood negative" : ["What a pity", "I'm sorry to hear that.", "So sad."],
-            "mood neutral" : ["I got it", "I see", "OK"]
+            "mood neutral" : ["I got it", "I see", "OK"],
+            "default": ["I am not super smart, I did't not understand you. But you can always ask me to explain what I can and cannot do for you",
+                        "I dod not understand you this time", "sorry, what?"]
         },
         "ru" : {
             "start" : ["Привет!", "Здорово!", "Че каво?", "Здравствуй!", "Привет тебе!"],
             "end" : ["Пока!", "Пока пока!", "Увидимся", "Приятно было поболтать", "До скорого!"],
             "mood positive" : ["Хорошие новости!", "Я за тебя рад", "Приятно слышать"],
             "mood negative" : ["Жаль", "Увы", "Грустно", "Грустишка", "Что поделать..."],
-            "mood neutral" : ["Понтяно", "Ясно", "Ок", "Угу"]
+            "mood neutral" : ["Понтяно", "Ясно", "Ок", "Угу"],
+            "default": ["Я не понял, повтори по-другому", "Или я глупый или ты хочешь что-то чего я не умею",
+                        "Я не понял, ты всегда можешь спросить у меня что я умею а что нет"]
         },
         "de" : {
             "start" : ["Hallo!", "Servus", "Was geht?", "Ich freue mich", "Hallo mein Freund!"],
             "end" : ["Tschüss!", "Ciao!", "Wir sehen uns", "Auf Wiedersehen", "Bis später", "Bis dann"],
             "mood positive" : ["Wie nett!", "Gute Nachrichten!", "Toll!"],
             "mood negative" : ["Schade", "Es tut mir leid", "Ach du Arme!"],
-            "mood neutral" : ["Jaha", "Jawohl", "Alles klar", "OK"]
+            "mood neutral" : ["Jaha", "Jawohl", "Alles klar", "OK"],
+            "default": ["Entschuldige, ich habe dich nicht verstanden", "Leider, habe ich nicht verstanden, oder ich kann es nicht machen",
+                        "Manchmal verstehe ich dich nicht, kanns du es umformulieren"]
         }
     }
+
+
+def code_to_name(language, code):
+    if language == 'ru':
+        if code == 'ru':
+            return "русский"
+        if code == 'en':
+            return "английский"
+        if code == 'de':
+            return "немецкий"
+    if language == 'en':
+        if code == 'ru':
+            return "russian"
+        if code == 'en':
+            return "english"
+        if code == 'de':
+            return "german"
+    if language == 'de':
+        if code == 'ru':
+            return "russisch"
+        if code == 'en':
+            return "englisch"
+        if code == 'de':
+            return "deutsch"
+    return None

@@ -12,28 +12,4 @@ def detect_language(message):
     return result
 
 
-def code_to_name(language, code):
-    if language == 'ru':
-        if code == 'ru':
-            return "русский"
-        if code == 'en':
-            return "английский"
-        if code == 'de':
-            return "немецкий"
-    if language == 'en':
-        if code == 'ru':
-            return "russian"
-        if code == 'en':
-            return "english"
-        if code == 'de':
-            return "german"
-    if language == 'de':
-        if code == 'ru':
-            return "russisch"
-        if code == 'en':
-            return "englisch"
-        if code == 'de':
-            return "deutsch"
-    return None
-
 

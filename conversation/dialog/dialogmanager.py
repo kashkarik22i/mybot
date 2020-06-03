@@ -4,6 +4,8 @@ class DialogManager:
     def get_next_move(self, msg):
         if "intent" in msg and msg["intent"] == 'hello':
             return {"move": "start"}
+        if "intent" in msg and msg["intent"] == 'latest':
+            return {"move": "get_mood", "get_mood": "non-empty"}
         if "intent" in msg and msg["intent"] == 'language':
             lang = msg["slots"][0][1]
             return {"move": "language", "language": lang}

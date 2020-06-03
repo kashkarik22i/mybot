@@ -50,12 +50,25 @@ class FullTestConversation(unittest.TestCase):
         self.add_dialog_flow(message)
         self.assertIn(get_response(message), ["What a pity", "I'm sorry to hear that.", "So sad."])
 
+    def test_get_mood_ru(self):
+        message = self._create_message()
+        save_chat_language(message, "ru")
+        message["text"] = "я устал"
+        self.add_dialog_flow(message)
+        get_response(message)
+
+        message = self._create_message()
+        save_chat_language(message, "ru")
+        message["text"] = "как я себя последнее время чувствовал?"
+        self.add_dialog_flow(message)
+        self.assertTrue("я устал" in get_response(message))
+
     def test_switch_language_en(self):
         message = self._create_message()
         save_chat_language(message, "en")
         self.add_dialog_flow(message)
         message["text"] = 'change to russian'
-        self.assertEqual(get_response(message), 'i will switch to russian now')
+        self.assertEqual(get_response(message), 'I will switch to russian now')
         self.assertEqual(get_chat_language(message), "ru")
 
     def test_switch_language_ru(self):
@@ -63,7 +76,7 @@ class FullTestConversation(unittest.TestCase):
         save_chat_language(message, "ru")
         self.add_dialog_flow(message)
         message["text"] = 'смени язык на английский'
-        self.assertEqual(get_response(message), 'меняю язык на английский')
+        self.assertEqual(get_response(message), 'Меняю язык на английский')
         self.assertEqual(get_chat_language(message), "en")
 
     def add_dialog_flow(self, message):

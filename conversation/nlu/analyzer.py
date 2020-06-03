@@ -5,16 +5,12 @@ class NLU:
     def parse(self, msg_obj, language):
         # Ilya made this super ugly:)
         msg = msg_obj["text"]
-        if "show me" in msg:
-            return {"text": self.preprocess(msg),
-                    "msg_obj": msg_obj,
-                    "intent": "get_mood"}
         if "ignore_dialogflow" not in msg_obj: # hack for testing for now
             intent_data = detect_intent_texts(msg, language)
             intent = intent_data["intent"]
             score = intent_data["score"]
             slots = intent_data["slots"]
-            if score > 0.65 and not intent == "Default Fallback Intent":
+            if score > 0.8 and not intent == "Default Fallback Intent":
                 # start using logger soon
                 print("using dialogflow: got intent {} and score {}".format(intent, score))
                 return {"text": self.preprocess(msg),
