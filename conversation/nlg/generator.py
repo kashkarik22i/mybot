@@ -42,7 +42,11 @@ class NLG:
             "mood neutral" : ["I got it", "I see", "OK"],
             "help": ["Sure, you can tell me how you feel now and ask how you felt lately"],
             "default": ["I am not super smart, I did't not understand you. But you can always ask me to explain what I can and cannot do for you",
-                        "I dod not understand you this time", "sorry, what?"]
+                        "I did not understand you this time", "sorry, what?"],
+            "initial_dialog_first_hello" : ["Oh hello! :) Let's begin. What is you name?",
+                                            "Hello there! Let's start. What should I call you?",
+                                            "Hello and welcome! What's your name?"],
+            "initial_dialog_purpose" : ["Nice to meet you! I'm Moody. I can understand emotions and will remember all that you tell me. How do you think you will use me?"]
         },
         "ru" : {
             "start" : ["Привет!", "Здорово!", "Че каво?", "Здравствуй!", "Привет тебе!"],
@@ -52,7 +56,11 @@ class NLG:
             "mood neutral" : ["Понтяно", "Ясно", "Ок", "Угу"],
             "help": ["Конечно, ты можешь мне рассказать как себя чувствуешь и что тебя беспокоит а потом спросить что тебя беспокоило последнее время"],
             "default": ["Я не понял, повтори по-другому", "Или я глупый или ты хочешь что-то чего я не умею",
-                        "Я не понял, ты всегда можешь спросить у меня что я умею а что нет"]
+                        "Я не понял, ты всегда можешь спросить у меня что я умею а что нет"],
+            "initial_dialog_first_hello" : ["Приветик :) Давай начнем. Как тебя зовут?",
+                                            "Привет! Для начала скажи мне, как тебя зовут",
+                                            "Привет, добро пожаловать! Как мне тебя называть?"],
+            "initial_dialog_purpose" : ["А я Псих. Приятно познакомиться. Я немного разбираюсь в человеческих чувствах, а еще я запомню все, что ты мне скажешь. Как думаешь, как я тебе буду полезен?"]
         },
         "de" : {
             "start" : ["Hallo!", "Servus", "Was geht?", "Ich freue mich", "Hallo mein Freund!"],
@@ -62,7 +70,9 @@ class NLG:
             "mood neutral" : ["Jaha", "Jawohl", "Alles klar", "OK"],
             "help": ["Naturlich, sag mir was dir storst oder frag nach dine laune letzte Woche"],
             "default": ["Entschuldige, ich habe dich nicht verstanden", "Leider, habe ich nicht verstanden, oder ich kann es nicht machen",
-                        "Manchmal verstehe ich dich nicht, kanns du es umformulieren"]
+                        "Manchmal verstehe ich dich nicht, kanns du es umformulieren"],
+            "initial_dialog_first_hello" : ["Hallo :) Lassen uns anfangen. Wie heisst du?"],
+            "initial_dialog_purpose" : ["Und ich bin Spinn. Nett, dich kennenzulernen. Ich verstehe etwas von Emotionen und dazu kann ich mir auch merken alles, was du sagst. Wie kann ich dir helfen?"]
         }
     }
 
