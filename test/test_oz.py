@@ -16,9 +16,10 @@ class TestOz(unittest.TestCase):
         test_patch.assert_called_once()
 
     def test_is_oz_message(self):
-        self.assertFalse(is_oz_message({"chat_id": "222772"}))
-        self.assertFalse(is_oz_message({"chat_id": "222773"}))
-        self.assertTrue(is_oz_message({"chat_id": "798772222"}))
+        self.assertFalse(is_oz_message({"chat_id": "222772", "text": "oz oz"}))
+        self.assertFalse(is_oz_message({"chat_id": "222773", "text": "oz oz"}))
+        self.assertTrue(is_oz_message({"chat_id": "798772222", "text": "oz oz"}))
+        self.assertFalse(is_oz_message({"chat_id": "798772222", "text": "boz boz"}))
 
     @patch('integration.integration.send_reply_message')
     def test_log_to_oz(self, test_patch):

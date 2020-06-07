@@ -32,7 +32,7 @@ def respond_oz_message(message):
         return
 
 def is_oz_message(message):
-    is_oz = message["chat_id"] == "798772222"
+    is_oz = message["chat_id"] == "798772222" and message["text"].startswith("oz")
     print("got message from oz: ", is_oz)
     return is_oz
 
