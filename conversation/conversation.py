@@ -17,7 +17,7 @@ def get_response(message) -> str:
     move = DialogManager().get_next_move(msg_parsed)
     print("detected move {move}".format(move=move["move"]))
     action = act_on_move(message, move)
-    if move == "next" and is_oz_on(message):
+    if move["move"] == "next" and is_oz_on(message):
         log_to_oz(message)
         return None
     return NLG().make_answer(move, language, action)
