@@ -1,3 +1,5 @@
+from persistence.logs import are_there_past_responses
+
 class DialogManager:
     goodbyes = {"bye bye","bye", "goodbye", "farewell", "ciao","cu", "see u", "c u", "see you", "until later", "till later", "talk to you later"}
 
@@ -47,4 +49,4 @@ class DialogManager:
             return None
 
     def is_bot_first_message(self, msg):
-        return True
+        return are_there_past_responses(msg)
