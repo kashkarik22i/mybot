@@ -37,7 +37,7 @@ def get_last(chat_id):
     db = firestore.Client()
     collection = db.collection('requests')
     docs = collection.where('chat_id', '==', chat_id)\
-        .orderBy("date").limit(1).stream()
+        .order_by("date").limit(1).stream()
     return [doc.to_dict() for doc in docs][0]
 
 def log_error():
