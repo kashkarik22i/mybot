@@ -30,7 +30,8 @@ def parse_message(js):
 
 def send_message(last_message, response, reply=False):
     chat_id = last_message["chat_id"]
-    if reply:
-        bot.sendMessage(chat_id=chat_id, text=response, reply_to_message_id=last_message["msg_id"])
-    else:
-        bot.sendMessage(chat_id=chat_id, text=response)
+    if response is not None:
+        if reply:
+            bot.sendMessage(chat_id=chat_id, text=response, reply_to_message_id=last_message["msg_id"])
+        else:
+            bot.sendMessage(chat_id=chat_id, text=response)

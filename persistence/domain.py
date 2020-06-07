@@ -30,6 +30,11 @@ def get_moods_in_range(message, from_date, to_date=None):
         .where('date', "<=", to_date).stream()
     return [doc.to_dict() for doc in docs]
 
+def delete_all_chat_moods(message):
+    db = firestore.Client()
+    docs = db.collection('moods').where('chat_id', '==', message["chat_id"]).stream()
+    for doc in docs:
+        doc.reference.delete()
 
 if __name__ == "__main__":
     time = datetime.utcnow()

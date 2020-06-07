@@ -8,6 +8,8 @@ def detect_language(message):
     else:
         print("using language as in user settings {}".format(message["language"]))
         result = message["language"]
+    if result is None:
+        result = 'en' # no better choice yet, need to autodetect later
     message["language"] = result
     return result
 

@@ -1,7 +1,7 @@
 from flask import Flask, request
 import traceback
 from conversation.secrets import TOKEN
-from integation.integration import process_json, connect
+from integration.integration import process_json, connect
 
 app = Flask(__name__)
 

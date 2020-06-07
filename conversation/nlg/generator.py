@@ -10,7 +10,7 @@ class NLG:
                 return "You told me the following recently:\n" + "\n".join([a["text"] for a in action])
             if language == "ru":
                 return "Ты мне говорил следующее:\n" + "\n".join([a["text"] for a in action])
-            if language == "du":
+            if language == "de":
                 return "Du hast mir das Folgenge in letzter Zeit gesagt:\n" + "\n".join([a["text"] for a in action])
         elif move == "mood":
             return random.choice(NLG.intents_to_utterances[language][move + " " + move_obj["mood"]])
@@ -50,7 +50,7 @@ class NLG:
             "mood positive" : ["Хорошие новости!", "Я за тебя рад", "Приятно слышать"],
             "mood negative" : ["Жаль", "Увы", "Грустно", "Грустишка", "Что поделать..."],
             "mood neutral" : ["Понтяно", "Ясно", "Ок", "Угу"],
-            "help": ["Конечно, мы можешь мне рассказать как себя чувствуешь и что тебя беспокоит а потом спросить что тебя песпокоило последнее время"],
+            "help": ["Конечно, ты можешь мне рассказать как себя чувствуешь и что тебя беспокоит а потом спросить что тебя беспокоило последнее время"],
             "default": ["Я не понял, повтори по-другому", "Или я глупый или ты хочешь что-то чего я не умею",
                         "Я не понял, ты всегда можешь спросить у меня что я умею а что нет"]
         },

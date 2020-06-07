@@ -3,11 +3,16 @@ from time import sleep
 from conversation.conversation import get_response
 from datetime import datetime
 from persistence.settings import get_chat_language, save_chat_language
+from persistence.domain import delete_all_chat_moods
 
 # only runs when env var is set up correctly to assess GCP services, e.g. dialogflow
 # export GOOGLE_APPLICATION_CREDENTIALS=~/Documents/work/projects/mybot/data/credentials/key
 # need to reference the service account json file for now
 class FullTestConversation(unittest.TestCase):
+
+    def tearDown(self):
+        # just to avoid garbage in the db
+        delete_all_chat_moods(self._create_message())
 
     def test_hello_en_language(self):
         message = self._create_message()
