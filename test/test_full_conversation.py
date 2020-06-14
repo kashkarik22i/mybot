@@ -5,8 +5,9 @@ from datetime import datetime
 from persistence.settings import get_chat_language, save_chat_language
 from persistence.domain import delete_all_chat_moods
 
-# only runs when env var is set up correctly to assess GCP services, e.g. dialogflow
-# export GOOGLE_APPLICATION_CREDENTIALS=~/Documents/work/projects/mybot/data/credentials/key
+
+# only runs when env var is set up correctly to assess GCP services, e.g. dialogflow, firebase
+# export GOOGLE_APPLICATION_CREDENTIALS=<path_to_service_account_key>
 # need to reference the service account json file for now
 class FullTestConversation(unittest.TestCase):
 
