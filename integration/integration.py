@@ -11,23 +11,26 @@ from integration.util import is_message_old
 from integration.tgram import connect as tgram_connect
 from integration.tgram import parse_message, send_message
 
+
 def process_json(js):
     try:
         message = parse_message(js)
         log_request(message=message)
-        response = get_response(message)
-        send_reply_message(message=message, response=response, reply=is_message_old(message))
+        response, analysis = get_response(message)
+        send_reply_message(message, response, analysis, is_message_old(message))
     except Exception:
         log_error()
         raise
 
-def send_reply_message(message, response, reply=False):
+
+def send_reply_message(message, response, analysis, reply=False):
     try:
-        log_response(message=message, response=response)
+        log_response(message=message, response=response, analysis=analysis)
         send_message(last_message=message, response=response, reply=reply)
     except Exception:
         log_error()
         raise
+
 
 def connect():
     try:

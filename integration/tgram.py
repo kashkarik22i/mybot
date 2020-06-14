@@ -10,8 +10,10 @@ from conversation.secrets import TOKEN, URL
 global bot
 bot = telegram.Bot(token=TOKEN)
 
+
 def connect():
     return bot.setWebhook('{URL}{HOOK}'.format(URL=URL, HOOK=TOKEN))
+
 
 def parse_message(js):
     update = telegram.Update.de_json(js, bot)
@@ -27,6 +29,7 @@ def parse_message(js):
             "date": date,
             "text": text,
             "language": language}
+
 
 def send_message(last_message, response, reply=False):
     chat_id = last_message["chat_id"]

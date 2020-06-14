@@ -6,9 +6,9 @@ from conversation.nlu.analyzer import NLU
 from conversation.oz import is_oz_on, respond_oz_message, log_to_oz, is_oz_message
 
 
-def get_response(message) -> str:
+def get_response(message):
     print("got text message :", message["text"])
-    message["text"] = message["text"].casefold() # everything is case insensitive for now in dialog part
+    message["text"] = message["text"].casefold()  # everything is case insensitive for now in dialog part
     language = detect_language(message)
     if is_oz_message(message):
         respond_oz_message(message)
@@ -20,4 +20,4 @@ def get_response(message) -> str:
     if move["move"] == "next" and is_oz_on(message):
         log_to_oz(message)
         return None
-    return NLG().make_answer(move, language, action)
+    return NLG().make_answer(move, language, action), move

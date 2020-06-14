@@ -3,6 +3,7 @@ from datetime import datetime
 from unittest.mock import patch
 from conversation.oz import is_oz_message, is_oz_on, respond_oz_message, log_to_oz
 
+
 class TestOz(unittest.TestCase):
 
     def test_is_oz_on(self):
@@ -26,7 +27,7 @@ class TestOz(unittest.TestCase):
         message = TestOz._create_message()
         log_to_oz(message)
         message["chat_id"] = "798772222"
-        test_patch.assert_called_once_with(message, "222772 1234 foo")
+        test_patch.assert_called_once_with(message, "222772 1234 foo", {"move": "oz ask"})
 
     @patch('conversation.oz.enabled_oz')
     @patch('integration.integration.send_reply_message')
@@ -54,7 +55,7 @@ class TestOz(unittest.TestCase):
 
         patch_get_message.assert_called_once_with("222772", "1234")
         patch_get_last.assert_called_once_with("222772")
-        patch_send_reply_message.assert_called_once_with(old_message, "bar bar", False)
+        patch_send_reply_message.assert_called_once_with(old_message, "bar bar", {"move": "oz text"}, False)
 
     @staticmethod
     def _create_message():

@@ -108,3 +108,4 @@ venv.bak/
 conversation/secrets.py
 .DS_Store
 data/
+persistence/responses_*
