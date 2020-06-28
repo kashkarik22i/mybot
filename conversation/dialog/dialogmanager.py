@@ -15,7 +15,7 @@ class DialogManager:
             return {"move": "end"}
         elif "mood" in msg and msg.get("mood"):
             return {"move": "mood", "mood": msg.get("mood")}
-        elif self.is_bot_first_message(msg["msg_obj"]) or msg.get("last_move") == "initial_dialog_first_hello":
+        elif self.is_bot_first_message(msg["msg_obj"]) or msg["msg_obj"].get("last_move") == "initial_dialog_first_hello":
             return self.run_first_dialog(msg["msg_obj"])
         else:
             return {"move": "next"}
