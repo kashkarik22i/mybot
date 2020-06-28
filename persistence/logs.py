@@ -29,7 +29,8 @@ def log_response(message, response, analysis):
       'date': message["date"],
       'response': response,
       'move': analysis["move"],
-      'language': message["language"]
+      'language': message["language"],
+      'last_move': message.get("last_move")
     })
 
 
@@ -55,7 +56,11 @@ def get_last(chat_id):
     collection = db.collection('requests')
     docs = collection.where('chat_id', '==', chat_id)\
         .order_by("date", direction=firestore.Query.DESCENDING).limit(1).stream()
-    return [doc.to_dict() for doc in docs][0]
+    as_dicts = [doc.to_dict() for doc in docs]
+    if len(as_dicts) > 0:
+        return as_dicts[0]
+    else:
+        return None
 
 
 def log_error():
@@ -92,4 +97,4 @@ def _write_chat(run, docs, chat_id, f, filename):
 
 
 if __name__ == "__main__":
-    _get_all_as_files()
+    print(get_last("798772222"))

@@ -16,7 +16,7 @@ class DialogManager:
         elif "mood" in msg and msg.get("mood"):
             return {"move": "mood", "mood": msg.get("mood")}
         elif self.is_bot_first_message(msg["msg_obj"]) or msg.get("last_move") == "initial_dialog_first_hello":
-            return self.run_first_dialog(msg)
+            return self.run_first_dialog(msg["msg_obj"])
         else:
             return {"move": "next"}
 
@@ -26,6 +26,8 @@ class DialogManager:
             print("No intent! Cannot move by intent cos there is no intent!")
             return None
         elif msg["intent"] == 'hello':
+            if DialogManager.is_bot_first_message(msg["msg_obj"]):
+                return DialogManager.run_first_dialog(msg["msg_obj"])
             return {"move": "start"}
         elif msg["intent"] == 'latest':
             return {"move": "get_mood", "get_mood": "non-empty"}
@@ -46,8 +48,8 @@ class DialogManager:
         elif msg["last_move"] == "initial_dialog_first_hello":
             return {"move": "initial_dialog_purpose"}
         else:
-            return None
+            return {"move": "start"}
 
     @staticmethod
     def is_bot_first_message(msg):
-        return are_there_past_responses(msg)
+        return not are_there_past_responses(msg)

@@ -2,6 +2,7 @@ import os.path
 import re
 from conversation.external.dflow import detect_intent_texts
 
+
 class NLU:
     def parse(self, msg_obj, language):
         # Ilya made this super ugly:)

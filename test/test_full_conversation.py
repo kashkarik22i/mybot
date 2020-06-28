@@ -15,27 +15,31 @@ class FullTestConversation(unittest.TestCase):
         # just to avoid garbage in the db
         delete_all_chat_moods(self._create_message())
 
-    def test_hello_en_language(self):
+    def test_initial_conversation_en(self):
         message = self._create_message()
         save_chat_language(message, "en")
+        message["last_move"] = "some_move_long_time_ago"
         self.add_dialog_flow(message)
+        message["text"] = 'hi'
         self.assertIn(get_response(message)[0], ["Hello!", "Hi there!", "What's up?", "Nice to see you!", "Hello dear!"])
 
-    def test_hello_ru_language(self):
+    def test_initial_conversation_ru(self):
         message = self._create_message()
         save_chat_language(message, "ru")
         self.add_dialog_flow(message)
         message["text"] = 'привет'
-        self.assertIn(get_response(message)[0], ["Привет!", "Здорово!", "Че каво?", "Здравствуй!", "Привет тебе!"])
-
-    def test_wrong_language(self):
+        response, move = get_response(message)
+        self.assertIn(response, ["Приветик :) Давай начнем. Как тебя зовут?",
+                                           "Привет! Для начала скажи мне, как тебя зовут",
+                                           "Привет, добро пожаловать! Как мне тебя называть?"])
         message = self._create_message()
         save_chat_language(message, "ru")
         self.add_dialog_flow(message)
-        message["text"] = 'hi'
-        self.assertIn(get_response(message)[0], ["Я не понял, повтори по-другому",
-                                              "Или я глупый или ты хочешь что-то чего я не умею",
-                                              "Я не понял, ты всегда можешь спросить у меня что я умею а что нет"])
+        message["last_move"] = move["move"]
+        message["text"] = 'меня зовут Артем а тебя'
+        self.assertIn(get_response(message)[0], [
+                "А я Псих. Приятно познакомиться. Я немного разбираюсь в человеческих чувствах, а еще я запомню все, "
+                "что ты мне скажешь. Как думаешь, как я тебе буду полезен?"])
 
     def test_mood_en_language(self):
         message = self._create_message()
