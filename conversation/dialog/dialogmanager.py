@@ -2,7 +2,7 @@ from persistence.logs import are_there_past_responses
 
 
 class DialogManager:
-    goodbyes = {"bye bye", "bye", "goodbye", "farewell", "ciao",
+    goodbyes = {"bye bye", "bye", "goodbye", "farewell", "ciao", "пока",
                 "cu", "see u", "c u", "see you", "until later", "till later", "talk to you later"}
 
     def get_next_move(self, msg):
