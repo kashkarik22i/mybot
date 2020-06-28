@@ -15,11 +15,11 @@ def respond_oz_message(message):
     text = message["text"]
     if text == "oz on":
         enable_oz()
-        send_reply_message(message, {"move": "oz on"}, "oz on")
+        send_reply_message(message, "oz on", {"move": "oz on"})
         return
     if text == "oz off":
         disable_oz()
-        send_reply_message(message, {"move": "oz off"}, "oz off")
+        send_reply_message(message, "oz off", {"move": "oz off"})
         return
     parts = text.split()
     if len(parts) >= 5 and parts[0] == "oz" and parts[3] == "text":
