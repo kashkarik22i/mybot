@@ -22,10 +22,7 @@ class DialogManager:
 
     @staticmethod
     def move_by_intent(msg):
-        if "intent" not in msg:
-            print("No intent! Cannot move by intent cos there is no intent!")
-            return None
-        elif msg["intent"] == 'hello':
+        if msg["intent"] == 'hello':
             if DialogManager.is_bot_first_message(msg["msg_obj"]):
                 return DialogManager.run_first_dialog(msg["msg_obj"])
             return {"move": "start"}

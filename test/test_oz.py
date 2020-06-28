@@ -43,7 +43,7 @@ class TestOz(unittest.TestCase):
         test_patch1.assert_called_once()
         test_patch2.assert_called_once()
 
-    @patch('conversation.oz.get_last')
+    @patch('conversation.oz.get_last_request')
     @patch('conversation.oz.get_message')
     @patch('integration.integration.send_reply_message')
     def test_respond_oz_message_fake(self, patch_send_reply_message, patch_get_message, patch_get_last):

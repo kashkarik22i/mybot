@@ -35,12 +35,7 @@ def log_response(message, response, analysis):
 
 
 def are_there_past_responses(message):
-    chat_id = message["chat_id"]
-    db = firestore.Client()
-    collection = db.collection('responses')
-    docs = collection.where('chat_id', '==', chat_id)\
-        .order_by("date", direction=firestore.Query.DESCENDING).limit(1).stream()
-    return len([doc.to_dict() for doc in docs]) == 1
+    return get_last_response(message['chat_id']) is not None
 
 
 def get_message(chat_id, msg_id):
@@ -51,7 +46,19 @@ def get_message(chat_id, msg_id):
     return [doc.to_dict() for doc in docs][0]
 
 
-def get_last(chat_id):
+def get_last_response(chat_id):
+    db = firestore.Client()
+    collection = db.collection('responses')
+    docs = collection.where('chat_id', '==', chat_id)\
+        .order_by("date", direction=firestore.Query.DESCENDING).limit(1).stream()
+    as_dicts = [doc.to_dict() for doc in docs]
+    if len(as_dicts) > 0:
+        return as_dicts[0]
+    else:
+        return None
+
+
+def get_last_request(chat_id):
     db = firestore.Client()
     collection = db.collection('requests')
     docs = collection.where('chat_id', '==', chat_id)\

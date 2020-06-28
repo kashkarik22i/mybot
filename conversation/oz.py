@@ -1,5 +1,5 @@
 from persistence.settings import is_oz_enabled, disable_oz, enable_oz
-from persistence.logs import get_message, get_last
+from persistence.logs import get_message, get_last_request
 
 
 def is_oz_on(message):
@@ -27,7 +27,7 @@ def respond_oz_message(message):
         chat_id = parts[1]
         msg_id = parts[2]
         old_message = get_message(chat_id, msg_id)
-        last = get_last(chat_id)
+        last = get_last_request(chat_id)
         is_old = last["msg_id"] != msg_id
         send_reply_message(old_message, " ".join(parts[4:]), {"move": "oz text"}, is_old)
         return

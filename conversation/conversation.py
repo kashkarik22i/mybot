@@ -4,7 +4,7 @@ from conversation.languages import detect_language
 from conversation.nlg.generator import NLG
 from conversation.nlu.analyzer import NLU
 from conversation.oz import is_oz_on, respond_oz_message, log_to_oz, is_oz_message
-from persistence.logs import get_last
+from persistence.logs import get_last_response
 
 
 def get_response(message):
@@ -27,7 +27,7 @@ def _prepare_message(message):
     message["text"] = message["text"].casefold()  # everything is case insensitive for now in dialog part
     language = detect_language(message)
     message["language"] = language
-    last = get_last(message["chat_id"])
+    last = get_last_response(message["chat_id"])
     if last is not None:
         message["last_move"] = last["move"]
     return message
