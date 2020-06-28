@@ -30,7 +30,8 @@ def respond_oz_message(message):
         last = get_last_request(chat_id)
         is_old = last["msg_id"] != msg_id
         send_reply_message(old_message, " ".join(parts[4:]), {"move": "oz text"}, is_old)
-        return None, {"move": "oz text"}
+        return "sent", {"move": "oz text"}
+    raise RuntimeError("bad message from oz")
 
 
 def is_oz_message(message):
@@ -45,6 +46,7 @@ def log_to_oz(message):
     from integration.integration import send_reply_message
     send_reply_message(_create_forward_message_for_oz(message),
                        "{} {} {}".format(message["chat_id"], message["msg_id"], message["text"]), {"move": "oz ask"})
+    return None, {"move": "oz ask"}
 
 
 def _create_forward_message_for_oz(message):
