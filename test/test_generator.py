@@ -23,7 +23,7 @@ class TestGenerator(unittest.TestCase):
         self.assertIn(NLG().make_answer({"move": "next"}, "en"), ["I am not super smart, I did't not understand you. "
                                                                   "But you can always ask me to explain what I can "
                                                                   "and cannot do for you",
-                                                                  "I dod not understand you this time", "sorry, what?"])
+                                                                  "I did not understand you this time", "sorry, what?"])
 
     def test_get_mood_none(self):
         answer = NLG().make_answer({"move": "get_mood"}, "en", {"positive": 0, "negative": 0})

@@ -29,5 +29,5 @@ def _prepare_message(message):
     message["language"] = language
     last = get_last(message["chat_id"])
     if last is not None:
-        message["last_move"] = last
+        message["last_move"] = last["move"]
     return message
