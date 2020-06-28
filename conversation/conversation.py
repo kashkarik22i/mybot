@@ -11,15 +11,13 @@ def get_response(message):
     print("got text message :", message["text"])
     message = _prepare_message(message)
     if is_oz_message(message):
-        respond_oz_message(message)
-        return
+        return respond_oz_message(message)
     msg_parsed = NLU().parse(message, message["language"])
     move = DialogManager().get_next_move(msg_parsed)
     print("detected move {move}".format(move=move["move"]))
     action = act_on_move(message, move)
     if move["move"] == "next" and is_oz_on(message):
-        log_to_oz(message)
-        return None
+        return log_to_oz(message)
     return NLG().make_answer(move, message["language"], action), move
 
 

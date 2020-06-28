@@ -16,11 +16,11 @@ def respond_oz_message(message):
     if text == "oz on":
         enable_oz()
         send_reply_message(message, "oz on", {"move": "oz on"})
-        return
+        return None, {"move": "oz on"}
     if text == "oz off":
         disable_oz()
         send_reply_message(message, "oz off", {"move": "oz off"})
-        return
+        return None, {"move": "oz off"}
     parts = text.split()
     if len(parts) >= 5 and parts[0] == "oz" and parts[3] == "text":
         print("using oz text to respond")
@@ -30,7 +30,7 @@ def respond_oz_message(message):
         last = get_last_request(chat_id)
         is_old = last["msg_id"] != msg_id
         send_reply_message(old_message, " ".join(parts[4:]), {"move": "oz text"}, is_old)
-        return
+        return None, {"move": "oz text"}
 
 
 def is_oz_message(message):
